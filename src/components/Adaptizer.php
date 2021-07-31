@@ -2,6 +2,8 @@
 
 namespace sszcore\components;
 
+use sszcore\traits\ComponentTrait;
+
 /**
  * Class Adaptizer
  * @package sszcore\components
@@ -9,17 +11,17 @@ namespace sszcore\components;
  */
 class Adaptizer
 {
+    use ComponentTrait;
+
     /**
      * @var array
      */
     public static $instance = [];
 
-    // vendor
+    /**
+     * @var \Mobile_Detect
+     */
     public $mobileDetect;
-
-    // project specific properties
-    protected $siteId;
-    protected $siteDir;
 
     // properties
     public $isDesktop = true;
@@ -44,10 +46,6 @@ class Adaptizer
     {
         // components
         $this->mobileDetect = new \Mobile_Detect;
-
-        // project specific properties
-        $this->siteId = $configs[ 'siteId' ] ?? getenv( 'SITE_ID' );
-        $this->siteDir = $configs[ 'siteDir' ] ?? getenv( 'SITE_DIR' );
 
         switch ( true ) {
             case $this->mobileDetect->isMobile() :
@@ -96,13 +94,10 @@ class Adaptizer
         switch ( true ) {
             case $this->isMobile :
                 return 'mobile';
-                break;
             case $this->isTablet :
                 return 'tablet';
-                break;
             default :
                 return 'desktop';
-                break;
         }
     }
 

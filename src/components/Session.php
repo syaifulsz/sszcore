@@ -2,6 +2,9 @@
 
 namespace sszcore\components;
 
+use sszcore\traits\ComponentTrait;
+use sszcore\traits\SingletonTrait;
+
 /**
  * Class Session
  * @package sszcore\components
@@ -9,41 +12,14 @@ namespace sszcore\components;
  */
 class Session
 {
-    const MINUTE_IN_SECONDS     = 60;
-    const HOUR_IN_SECONDS       = 3600;
-    const DAY_IN_SECONDS        = 86400;
-    const WEEK_IN_SECONDS       = 604800;
-    const MONTH_IN_SECONDS      = 2592000;
-    const YEAR_IN_SECONDS       = 31536000;
-
-    // project specific properties
-    protected $siteId;
-    protected $siteDir;
-
-    protected static $instance = [];
-
-    /**
-     * @param array $config
-     * @return static
-     */
-    public static function getInstance( array $config = [] ) : self
-    {
-        $key = md5( http_build_query( $config ) );
-        if ( !isset( self::$instance[ $key ] ) ) {
-            self::$instance[ $key ] = new self( $config );
-        }
-        return self::$instance[ $key ];
-    }
+    use ComponentTrait;
+    use SingletonTrait;
 
     public function __construct( array $configs = [] )
     {
         if ( !isset( $_SESSION ) ) {
             session_start();
         }
-
-        // project specific properties
-        $this->siteId = $configs[ 'siteId' ] ?? getenv( 'SITE_ID' );
-        $this->siteDir = $configs[ 'siteDir' ] ?? getenv( 'SITE_DIR' );
     }
 
     /**
@@ -150,7 +126,7 @@ class Session
      */
     public static function setCookie( string $key, $value, int $duration = 0, string $path = '/' )
     {
-        setcookie( $key, $value, time() + ( $duration ?: ( 5 * self::MINUTE_IN_SECONDS ) ), $path, null, Request::isHttps(), false );
+        setcookie( $key, $value, time() + ( $duration ?: ( 5 * DateTime::MINUTE_IN_SECONDS ) ), $path, null, Request::isHttps(), false );
     }
 
     /**
