@@ -1,5 +1,5 @@
 {
-    "name": "syaifulsz/ssz-core",
+    "name": "syaifulsz/sszcore",
     "description": "Core components for SSZ1",
     "type": "library",
     "authors": [
@@ -9,6 +9,7 @@
         }
     ],
     "require": {
+        "php": "^7.3",
         "mobiledetect/mobiledetectlib": "^2.8",
         "illuminate/support": "^8.52",
         "symfony/http-foundation": "^5.3"
