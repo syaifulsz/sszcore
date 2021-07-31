@@ -10,13 +10,13 @@ use sszcore\components\Str;
  * @package sszcore\traits
  * @since 0.1.3
  *
- * @property string    site_id
- * @property string    site_env
- * @property string    site_dir
- * @property string    app_dir
- * @property boolean   is_cli
- * @property boolean   is_ajax
- * @property Request   request
+ * @property string site_id
+ * @property string site_env
+ * @property string site_dir
+ * @property string app_dir
+ * @property boolean is_cli
+ * @property boolean is_ajax
+ * @property Request request
  */
 trait ComponentTrait
 {

@@ -3,7 +3,7 @@
 namespace sszcore\traits;
 
 /**
- * SingletonTrait
+ * Trait SingletonTrait
  * @package sszcore\traits
  * @since 0.1.2
  */

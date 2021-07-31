@@ -9,12 +9,16 @@ use sszcore\traits\SingletonTrait;
  * Class Session
  * @package sszcore\components
  * @since 0.1.0
+ * @since 0.1.5 - Use Cookie Component
  */
 class Session
 {
     use ComponentTrait;
     use SingletonTrait;
 
+    /**
+     * @param array $configs
+     */
     public function __construct( array $configs = [] )
     {
         if ( !isset( $_SESSION ) ) {
@@ -115,7 +119,7 @@ class Session
      */
     public function getCookie( string $key )
     {
-        return !empty( $_COOKIE[ $key ] ) ? $_COOKIE[ $key ] : null;
+        return Cookie::get( $key );
     }
 
     /**
@@ -126,7 +130,7 @@ class Session
      */
     public static function setCookie( string $key, $value, int $duration = 0, string $path = '/' )
     {
-        setcookie( $key, $value, time() + ( $duration ?: ( 5 * DateTime::MINUTE_IN_SECONDS ) ), $path, null, Request::isHttps(), false );
+        Cookie::set( $key, $value, $duration, $path );
     }
 
     /**
@@ -134,8 +138,7 @@ class Session
      */
     public static function removeCookie( string $key )
     {
-        unset( $_COOKIE[ $key ] );
-        setcookie( $key, null, -1, '/', false, false );
+        Cookie::remove( $key );
     }
 
     /**

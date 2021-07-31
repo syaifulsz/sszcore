@@ -3,7 +3,7 @@
 namespace sszcore\traits;
 
 /**
- * ConfigGetClassTrait
+ * Trait ConfigGetClassTrait
  * @package sszcore\traitsComponentTrait.php
  * @since 0.1.4
  */
