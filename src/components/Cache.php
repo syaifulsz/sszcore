@@ -54,7 +54,7 @@ class Cache
             'cache.default' => $configs[ 'driver' ] ?? 'memcached', // `file` or `memcached`
             'cache.stores.file' => [
                 'driver' => 'file',
-                'path' => __DIR__ . "/../../sites/{$this->site_id}/runtime/cache"
+                'path' => "{$this->site_dir}/runtime/cache"
             ],
             'cache.stores.memcached' => [
                 'driver' => 'memcached',
@@ -68,7 +68,7 @@ class Cache
             ],
             'cache.prefix' => $this->prefix
         ];
-        $this->container['memcached.connector'] = new MemcachedConnector();
+        $this->container[ 'memcached.connector' ] = new MemcachedConnector();
 
         $this->container[ 'files' ] = new \Illuminate\Filesystem\Filesystem();
 
@@ -82,7 +82,7 @@ class Cache
     public function getCacheConfigAttribute()
     {
         if ( !isset( $this->attributes[ 'cache_config' ] ) ) {
-            $config = require __DIR__ . '/../configs/memcached.php';
+            $config = require "{$this->app_dir}/configs/memcached.php";
             if ( $this->site_id ) {
                 $siteConfig = "{$this->site_dir}/configs/memcached.php";
                 if ( file_exists( $siteConfig ) ) {
@@ -100,7 +100,6 @@ class Cache
             }
             return $this->attributes[ 'cache_config' ] = $config;
         }
-
         return $this->attributes[ 'cache_config' ] ?? [];
     }
 

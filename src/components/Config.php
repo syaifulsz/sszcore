@@ -64,13 +64,6 @@ class Config
         // project specific properties
         $this->site_subdomain = ( getenv( 'SITE_SUBDOMAIN' ) !== 'www' ? getenv( 'SITE_SUBDOMAIN' ) : null );
 
-        if ( !$this->site_dir && $this->site_id ) {
-            $this->site_dir = realpath( __DIR__ . "/../../sites/{$this->site_id}" );
-        }
-
-        $env = getenv( 'SITE_ENV' ) ?: 'development';
-        $this->site_env = strtolower( $env );
-
         $this->configs = $this->buildConfig( [
             'site_id' => $this->site_id,
             'site_dir' => $this->site_dir,
@@ -154,7 +147,7 @@ class Config
         }
 
         $config = [];
-        $configDir = __DIR__ . '/../configs/*.php';
+        $configDir = "{$this->app_dir}/configs/*.php";
         foreach ( glob( $configDir ) as $file ) {
             $configKey = pathinfo( $file, PATHINFO_FILENAME );
             $config[ $configKey ] = array_replace_recursive( require( $file ), $this->adaptiveConfig( $file ) );
@@ -162,14 +155,14 @@ class Config
         
         if ( $this->site_env ) {
             $envConfig = [];
-            $envConfigPath = __DIR__ . '/../configs/' . $this->site_env . '.php';
+            $envConfigPath = "{$this->app_dir}/configs/{$this->site_env}.php";
             if ( file_exists( $envConfigPath ) ) {
                 $config = array_replace_recursive( $config, require( $envConfigPath ), $this->adaptiveConfig( $envConfigPath ) );
             }
         }
 
         $local = [];
-        $localPath = __DIR__ . '/../configs/local.php';
+        $localPath = "{$this->app_dir}/configs/local.php";
         if ( file_exists( $localPath ) ) {
             $config = array_replace_recursive( $config, require( $localPath ), $this->adaptiveConfig( $localPath ) );
         }
@@ -263,33 +256,8 @@ class Config
      */
     public function getAppConfig( string $key = '', $default = null )
     {
-        $config = require( __DIR__ . '/../configs/app.php' );
-
-        $configSiteApp = __DIR__ . "/../../sites/{$this->site_id}/configs/app.php";
-        if ( !file_exists( $configSiteApp ) ) {
-            throw new \Error( 'App configuration for site ' . strtoupper( $this->site_id ) . ' is not found!' );
-        }
-
-        if ( $this->site_id ) {
-            $config = array_replace_recursive( $config, require( $configSiteApp ) );
-        }
-
-        if ( $this->site_env ) {
-
-            if ( file_exists( "{$this->site_dir}/configs/{$this->site_env}.php" ) ) {
-                $appEnvConfig = require( "{$this->site_dir}/configs/{$this->site_env}.php" );
-                $config = array_replace_recursive( $config, ( $appEnvConfig[ 'app' ] ?? [] ) );
-            }
-
-            if ( file_exists( "{$this->site_dir}/configs/{$this->site_env}-local.php" ) ) {
-                $appEnvConfig = require( "{$this->site_dir}/configs/{$this->site_env}-local.php" );
-                $config = array_replace_recursive( $config, ( $appEnvConfig[ 'app' ] ?? [] ) );
-            }
-        }
-
         if ( $key ) {
-            // @see https://laravel.com/docs/master/helpers#method-data-get
-            return data_get( $config, $key ) ?: $default;
+            return data_get( ( $this->configs[ 'app' ] ?? [] ), $key ) ?: $default;
         }
 
         return $default;

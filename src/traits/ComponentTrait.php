@@ -8,10 +8,12 @@ use sszcore\components\Str;
 /**
  * Trait ComponentTrait
  * @package sszcore\traits
+ * @since 0.1.3
  *
  * @property string    site_id
  * @property string    site_env
  * @property string    site_dir
+ * @property string    app_dir
  * @property boolean   is_cli
  * @property boolean   is_ajax
  * @property Request   request
@@ -90,7 +92,7 @@ trait ComponentTrait
     public function getSiteIdAttribute()
     {
         if ( !isset( $this->attributes[ 'site_id' ] ) ) {
-            return $this->attributes[ 'site_id' ] ?? getenv( 'SITE_ID' );
+            return $this->attributes[ 'site_id' ] = getenv( 'SITE_ID' );
         }
 
         return $this->attributes[ 'site_id' ] ?? '';
@@ -102,10 +104,20 @@ trait ComponentTrait
     public function getSiteDirAttribute()
     {
         if ( !isset( $this->attributes[ 'site_dir' ] ) ) {
-            return $this->attributes[ 'site_dir' ] ?? getenv( 'SITE_DIR' );
+            return $this->attributes[ 'site_dir' ] = getenv( 'SITE_DIR' );
         }
-
         return $this->attributes[ 'site_dir' ] ?? '';
+    }
+
+    /**
+     * @return string
+     */
+    public function getAppDirAttribute()
+    {
+        if ( !isset( $this->attributes[ 'app_dir' ] ) && $this->site_dir ) {
+            return $this->attributes[ 'app_dir' ] = str_replace( "/sites/{$this->site_id}", '', $this->site_dir ) . '/app';
+        }
+        return $this->attributes[ 'app_dir' ] ?? '';
     }
 
     /**
@@ -114,9 +126,9 @@ trait ComponentTrait
     public function getSiteEnvAttribute()
     {
         if ( !isset( $this->attributes[ 'site_env' ] ) ) {
-            return $this->attributes[ 'site_env' ] ?? getenv( 'SITE_ENV' );
+            $env = getenv( 'SITE_ENV' );
+            return $this->attributes[ 'site_env' ] = strtolower( $env );
         }
-
         return $this->attributes[ 'site_env' ] ?? '';
     }
 
