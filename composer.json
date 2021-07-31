@@ -1,0 +1,21 @@
+{
+    "name": "syaifulsz/ssz-core",
+    "description": "Core components for SSZ1",
+    "type": "library",
+    "authors": [
+        {
+            "name": "Syaiful Shah Zinan",
+            "email": "syaifulshahzinan@gmail.com"
+        }
+    ],
+    "require": {
+        "mobiledetect/mobiledetectlib": "^2.8",
+        "illuminate/support": "^8.52",
+        "symfony/http-foundation": "^5.3"
+    },
+    "autoload": {
+        "psr-4": {
+            "sszcore\\": "src"
+        }
+    }
+}
