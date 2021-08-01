@@ -1,14 +1,13 @@
 <?php
 
-namespace sszcore\components;
+namespace sszcore\components\abstracts;
 
 use sszcore\traits\ComponentTrait;
 use sszcore\traits\ConfigPropertyTrait;
-use sszcore\traits\SingletonTrait;
 
 /**
  * Class Url
- * @package sszcore\components
+ * @package sszcore\components\abstracts
  * @since 0.1.5
  */
 abstract class Url implements UrlInterface
@@ -22,7 +21,6 @@ abstract class Url implements UrlInterface
     }
 
     use ComponentTrait;
-    use SingletonTrait;
     use ConfigPropertyTrait;
 
     // components
@@ -59,6 +57,10 @@ abstract class Url implements UrlInterface
      */
     public function __construct( array $configs = [] )
     {
+        if ( !method_exists( $this, 'getInstance' ) ) {
+            throw new \Error( 'Missing Singleton! This class should be use with Singleton!' );
+        }
+
         // components
         $this->auth = $this->initializeComponentAuth();
 

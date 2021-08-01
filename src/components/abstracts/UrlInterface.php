@@ -1,14 +1,19 @@
 <?php
 
-namespace sszcore\components;
+namespace sszcore\components\abstracts;
 
 /**
- * Class Url
- * @package sszcore\components
+ * Interface Url
+ * @package sszcore\components\abstracts
  * @since 0.1.5
  */
 interface UrlInterface
 {
+    /**
+     * @return mixed
+     */
+    public static function getInstance( $configs );
+
     /**
      * @return string
      */
