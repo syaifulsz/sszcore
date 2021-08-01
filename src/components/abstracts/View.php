@@ -11,6 +11,7 @@ use sszcore\traits\UrlPropertyTrait;
 use sszcore\traits\ViewHtmlElementRenderTrait;
 use voku\helper\HtmlMin;
 use sszcore\components\Request;
+use sszcore\components\Str;
 
 /**
  * Class View
