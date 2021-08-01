@@ -2,26 +2,34 @@
 
 namespace sszcore\traits;
 
-use sszcore\components\Url;
-
 /**
  * Trait UrlPropertyTrait
  * @package sszcore\traits
  * @since 0.1.5
- *
- * @property Url url
  */
 trait UrlPropertyTrait
 {
     use ComponentTrait;
 
     /**
-     * @return Url
+     * @TODO Need to configurize this into Configs
+     * @return null
+     */
+    public function initializeComponentUrl()
+    {
+        return null;
+    }
+
+    /**
+     * @return mixed
      */
     public function getUrlAttribute()
     {
         if ( !isset( $this->attributes[ 'url' ] ) ) {
-            return $this->attributes[ 'url' ] = Url::getInstance();
+            if ( !$init = $this->initializeComponentUrl() ) {
+                throw new \Error( 'Missing Component Initialization for Url!' );
+            }
+            return $this->attributes[ 'url' ] = $init;
         }
         return $this->attributes[ 'url' ] ?? null;
     }
