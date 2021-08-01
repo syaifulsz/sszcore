@@ -5,6 +5,7 @@ namespace sszcore\components\abstracts;
 use sszcore\traits\ComponentTrait;
 use sszcore\traits\ConfigPropertyTrait;
 use sszcore\components\Str;
+use sszcore\components\Session;
 
 /**
  * Class Url
