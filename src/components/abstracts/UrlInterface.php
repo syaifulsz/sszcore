@@ -10,11 +10,6 @@ namespace sszcore\components\abstracts;
 interface UrlInterface
 {
     /**
-     * @return mixed
-     */
-    public static function getInstance( $configs );
-
-    /**
      * @return string
      */
     public static function get_key_session_previous_url();
