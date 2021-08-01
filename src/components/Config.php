@@ -54,10 +54,11 @@ class Config
         return $this->attributes[ 'master_cache_key' ] ?? '';
     }
 
-    public function __construct()
+    /**
+     * @param array $configs
+     */
+    public function __construct( array $configs = [] )
     {
-        $this->cli = ( php_sapi_name() === 'cli' );
-
         $this->adaptizer = Adaptizer::getInstance();
         $this->cache = Cache::getInstance();
 
@@ -138,6 +139,11 @@ class Config
         return 'development';
     }
 
+    /**
+     * @param array $params
+     * @param bool $fresh
+     * @return array
+     */
     private function buildConfig( array $params = [], bool $fresh = false ) : array
     {
         $cachedConfigFile = "{$this->site_dir}/configs/cached/{$this->site_env}-cached.json";
@@ -282,10 +288,16 @@ class Config
         return $this->configs;
     }
 
+    /**
+     * @param string $key
+     * @param null $default
+     * @return array|mixed|null
+     *
+     * @see https://laravel.com/docs/master/helpers#method-data-get
+     */
     public function get( string $key = '', $default = null )
     {
         if ( $key ) {
-            // @see https://laravel.com/docs/master/helpers#method-data-get
             return data_get( $this->configs, $key ) ?: $default;
         }
 

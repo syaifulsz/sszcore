@@ -18,7 +18,8 @@
         "illuminate/filesystem": "^8.52",
         "illuminate/database": "^8.52",
         "illuminate/pagination": "^8.52",
-        "firebase/php-jwt": "^5.4"
+        "firebase/php-jwt": "^5.4",
+        "voku/html-min": "^4.4"
     },
     "autoload": {
         "psr-4": {
