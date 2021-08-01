@@ -12,6 +12,8 @@ use sszcore\traits\ViewHtmlElementRenderTrait;
 use voku\helper\HtmlMin;
 use sszcore\components\Request;
 use sszcore\components\Str;
+use sszcore\models\Component\View\Pagination;
+use sszcore\models\Component\View\Manager;
 
 /**
  * Class View
@@ -1064,10 +1066,41 @@ abstract class View
     }
 
     /**
+     * @deprecated
      * @return Collection
      */
     public function getManagerQueryItems()
     {
         return $this->getParams( 'queryItems', new Collection );
+    }
+
+    /**
+     * @return Manager
+     */
+    public function getManager()
+    {
+        $manager = new Manager();
+        $manager->setAttributes( [
+            'parameterKeyword'          => $this->getParams( 'parameterKeyword', '' ),
+            'parameterPaged'            => $this->getParams( 'parameterPaged', 0 ),
+            'parameterTotalAvailable'   => $this->getParams( 'parameterTotalAvailable', 0 ),
+            'parameterTotalShowing'     => $this->getParams( 'parameterTotalShowing', 0 ),
+            'parameterPagesAvailable'   => $this->getParams( 'parameterPagesAvailable', 0 ),
+            'parameterOffset'           => $this->getParams( 'parameterOffset', 0 ),
+            'parameterLimit'            => $this->getParams( 'parameterLimit', 0 ),
+            'queryItems'                => $this->getParams( 'queryItems' ),
+            'pagination'                => $this->getParams( 'pagination' ),
+        ] );
+        return $manager;
+    }
+
+    /**
+     * @return Pagination
+     */
+    public function getPagination()
+    {
+        $pagination = new Pagination();
+        $pagination->setAttributes( $this->getParams( 'pagination' ) );
+        return $pagination;
     }
 }
