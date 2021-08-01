@@ -11,7 +11,7 @@ use sszcore\traits\SingletonTrait;
  * @package sszcore\components
  * @since 0.1.5
  */
-class Url
+abstract class Url implements UrlInterface
 {
     /**
      * @return string
