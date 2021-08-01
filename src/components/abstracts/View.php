@@ -71,6 +71,21 @@ abstract class View
      */
     public function __get( $name )
     {
+        $method = 'get' . Str::studly( $name ) . 'Attribute';
+        $property = "_{$name}";
+
+        if ( method_exists( $this, $method ) ) {
+            return $this->$method();
+        }
+
+        if ( property_exists( $this, $property ) ) {
+            return $this->$property;
+        }
+
+        if ( isset( $this->attributes[ $name ] ) ) {
+            return $this->attributes[ $name ];
+        }
+
         if ( !property_exists( $this, $name ) ) {
 
             /**
