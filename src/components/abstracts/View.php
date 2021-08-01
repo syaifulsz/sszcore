@@ -1,16 +1,16 @@
 <?php
 
-namespace sszcore\components;
+namespace sszcore\components\abstracts;
 
 use Illuminate\Support\Collection;
 use sszcore\traits\AdaptizerPropertyTrait;
 use sszcore\traits\CachePropertyTrait;
 use sszcore\traits\ComponentTrait;
 use sszcore\traits\ConfigPropertyTrait;
-use sszcore\traits\SingletonTrait;
 use sszcore\traits\UrlPropertyTrait;
 use sszcore\traits\ViewHtmlElementRenderTrait;
 use voku\helper\HtmlMin;
+use sszcore\components\Request;
 
 /**
  * Class View
@@ -19,10 +19,9 @@ use voku\helper\HtmlMin;
  *
  * @property Request request
  */
-class View
+abstract class View
 {
     use ComponentTrait;
-    use SingletonTrait;
     use ConfigPropertyTrait;
     use CachePropertyTrait;
     use UrlPropertyTrait;
@@ -140,6 +139,10 @@ class View
      */
     public function __construct( array $config = [] )
     {
+        if ( !method_exists( $this, 'getInstance' ) ) {
+            throw new \Error( 'Missing Singleton! This class should be use with Singleton!' );
+        }
+
         set_error_handler( [ $this, 'errorHandler' ] );
 
         // components
