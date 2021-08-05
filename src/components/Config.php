@@ -373,4 +373,30 @@ class Config
         $locations = $this->getLocationStates( $countryCode );
         return $locations[ 'statesBySlug' ]->get( $slug );
     }
+
+    /**
+     * @return array
+     */
+    public function getPhinxConfig()
+    {
+        return [
+            'paths' => [
+                'migrations' => $this->get( 'siteDir' ) . '/database/migrations',
+                'seeds' => $this->get( 'siteDir' ) . '/database/seeds',
+            ],
+            'environments' => [
+                'default_migration_table' => 'phinxlog',
+                'default_database' => 'development',
+                'development' => [
+                    'adapter' => 'mysql',
+                    'host' => $this->get( 'database.mysql.host', '127.0.0.1' ),
+                    'name' => $this->get( 'database.mysql.database', '' ),
+                    'user' => $this->get( 'database.mysql.username', '' ),
+                    'pass' => $this->get( 'database.mysql.password', '' ),
+                    'port' => $this->get( 'database.mysql.port', 3306 ),
+                    'charset' => 'utf8',
+                ],
+            ],
+        ];
+    }
 }
