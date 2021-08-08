@@ -14,6 +14,7 @@ use sszcore\components\Str;
  * @property string site_env
  * @property string site_dir
  * @property string app_dir
+ * @property string root_dir
  * @property boolean is_cli
  * @property boolean is_ajax
  * @property Request request
@@ -118,6 +119,17 @@ trait ComponentTrait
             return $this->attributes[ 'app_dir' ] = str_replace( "/sites/{$this->site_id}", '', $this->site_dir ) . '/app';
         }
         return $this->attributes[ 'app_dir' ] ?? '';
+    }
+
+    /**
+     * @return string
+     */
+    public function getRootDirAttribute()
+    {
+        if ( !isset( $this->attributes[ 'root_dir' ] ) && $this->app_dir ) {
+            return $this->attributes[ 'root_dir' ] = str_replace( '/app', '', $this->app_dir );
+        }
+        return $this->attributes[ 'root_dir' ] ?? '';
     }
 
     /**
