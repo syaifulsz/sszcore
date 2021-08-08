@@ -85,7 +85,7 @@ trait ConsoleComponentTrait
      */
     public function echo( $str, string $color = '' )
     {
-        $c = new Color();
+        $c = Color::getInstance();
 
         if ( is_array( $str ) ) {
             print_r( $str );
