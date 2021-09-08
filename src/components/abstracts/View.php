@@ -21,6 +21,7 @@ use sszcore\models\Component\View\Manager;
  * @since 0.1.5
  *
  * @property Request request
+ * @property Collection mutate_properties
  */
 abstract class View
 {
@@ -1102,5 +1103,14 @@ abstract class View
         $pagination = new Pagination();
         $pagination->setAttributes( $this->getParams( 'pagination' ) );
         return $pagination;
+    }
+
+    /**
+     * Get Mutate Properties
+     * @return Collection
+     */
+    public function getMutatePropertiesAttribute()
+    {
+        return collect( $this->getParams( 'mutateProperties', [] ) );
     }
 }
