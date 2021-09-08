@@ -1,0 +1,53 @@
+<?php
+
+namespace app\controllers\__MAKER_NAMESPACE__;
+
+use app\components\ViewHelper\Components\Layout;
+use app\controllers\PrivateController;
+use sszcore\traits\ManagerTrait;
+
+/**
+ * Class __MAKER_CONTROLLER_NAME__
+ * @package app\controllers\__MAKER_NAMESPACE__
+ *
+ * @since sszcore-0.2.0
+ * Created at __MAKER_CREATED_AT__ via SSZCORE Console Maker (Beta)
+ */
+class __MAKER_CONTROLLER_NAME__ extends PrivateController
+{
+    /**
+     * Initiate mutate property on class init
+     */
+    public $initMutateProperties = [];
+
+    /**
+     * Initiate controller with layout and breadcrumb
+     */
+    protected function init()
+    {
+        parent::init();
+        $this->setLayout( Layout::ADMIN_LAYOUT_NAME );
+        $this->addPageTitle( '__MAKER_CONTROLLER_NAME__' );
+        $this->addBreadcrumb(
+            '__MAKER_CONTROLLER_NAME__',
+            '__MAKER_CONTROLLER_NAME__',
+            '#'
+        );
+    }
+
+    use ManagerTrait;
+
+    /**
+     * Manager query based on return Model
+     */
+    public function model()
+    {
+        // return Model
+    }
+
+    public function actionIndex()
+    {
+        $this->listing();
+        $this->render();
+    }
+}
