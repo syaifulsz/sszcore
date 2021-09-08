@@ -9,7 +9,7 @@ use app\controllers\PrivateController;
  * Class __MAKER_CONTROLLER_NAME__
  * @package app\controllers\__MAKER_NAMESPACE__
  *
- * @since sszcore-0.2.0
+ * @since syaifulsz/sszcore-0.2.0
  * Created at __MAKER_CREATED_AT__ via SSZCORE Console Maker (Beta)
  */
 class __MAKER_CONTROLLER_NAME__ extends PrivateController

@@ -36,7 +36,7 @@ class CreateConsoleControllerController extends ConsoleController
         $namespace = implode( '\\', $classnameArray );
 
         // get template
-        $templateDir = realpath( __DIR__ . '/../templates' );
+        $templateDir = realpath( __DIR__ . '/templates' );
         $template = "{$templateDir}/console/{$template}.txt";
         if ( !file_exists( $template ) ) {
             $this->echo( 'Error: Template not exist!', Color::RED_NAME );

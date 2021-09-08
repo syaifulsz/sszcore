@@ -8,7 +8,7 @@ use sszcore\components\abstracts\ConsoleController;
  * Class __MAKER_CONTROLLER_NAME__
  * @package console\__MAKER_NAMESPACE__
  *
- * @since sszcore-0.2.0
+ * @since syaifulsz/sszcore-0.2.0
  * Created at __MAKER_CREATED_AT__ via SSZCORE Console Maker (Beta)
  */
 class __MAKER_CONTROLLER_NAME__ extends ConsoleController
