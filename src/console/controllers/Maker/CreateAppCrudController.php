@@ -5,17 +5,14 @@ namespace sszcore\console\controllers\Maker;
 use sszcore\components\abstracts\ConsoleController;
 use sszcore\components\Console\Color;
 use sszcore\components\Str;
-use sszcore\traits\CreateTemplateNameFromClassname;
 
 /**
- * Class CreateAppControllerController
+ * Class CreateAppCrudController
  * @package sszcore\console\controllers\Maker
  * @since 0.2.0
  */
-class CreateAppControllerController extends ConsoleController
+class CreateAppCrudController extends ConsoleController
 {
-    use CreateTemplateNameFromClassname;
-
     public function run()
     {
         if ( !$classname = $this->params->get( 'classname' ) ) {
@@ -42,7 +39,7 @@ class CreateAppControllerController extends ConsoleController
 
         // get template
         $templateDir = realpath( __DIR__ . '/templates' );
-        $template = "{$templateDir}/app/controllers/{$template}.txt";
+        $template = "{$templateDir}/app/{$template}.txt";
         if ( !file_exists( $template ) ) {
             $this->echo( 'Error: Template not exist!', Color::RED_NAME );
             $this->echoBreak();
@@ -72,19 +69,12 @@ class CreateAppControllerController extends ConsoleController
 
         file_put_contents( $file, $templateContent );
 
-        $viewFile = "{$this->config->app_dir}/views/" . $this->createTemplateNameFromClassname( $classname );
-        $viewFileDirArr = explode( '//', $viewFile );
-        unset( $viewFileDirArr[ count( $viewFileDirArr ) - 1 ] );
-        $viewFileDir = implode( '//', $viewFileDirArr );
-
         $this->echoBreak();
-        $this->echo( "TEMPLATE:        {$template}" );
-        $this->echo( "NAMESPACE:       {$namespace}" );
-        $this->echo( "CLASSNAME:       {$classname}" );
-        $this->echo( "CLASS_FILE_DIR:  {$fileDir}" );
-        $this->echo( "CLASS_FILE:      {$file}" );
-        $this->echo( "VIEW_FILE_DIR:   {$viewFileDir}" );
-        $this->echo( "VIEW_FILE:       {$viewFile}" );
+        $this->echo( "TEMPLATE:  {$template}" );
+        $this->echo( "NAMESPACE: {$namespace}" );
+        $this->echo( "CLASSNAME: {$classname}" );
+        $this->echo( "FILE_DIR:  {$fileDir}" );
+        $this->echo( "FILE:      {$file}" );
         $this->echoBreak();
         $this->echoBreak();
 

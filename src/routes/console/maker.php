@@ -21,6 +21,6 @@ return [
             'controller'    => '\\sszcore\\console\\controllers\\Maker\\CreateAppControllerController',
             'method'        => 'run',
             'description'   => 'Create Component --classname= --template=ManagerController|Controller'
-        ],
+        ]
     ]
 ];

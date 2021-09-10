@@ -1,0 +1,67 @@
+<?php
+
+use app\components\View;
+use app\components\ViewHelper\Components\Layout;
+use sszcore\components\View\FontAwesome;
+
+/**
+ * @var $this View
+ */
+
+?>
+
+<?php  $this->block(); ?>
+<div class="d-flex flex-column flex-md-row justify-content-between mb-3 mb-md-0">
+    <div>
+        <?= $this->helper->widget->heading( 'Manager', 'Short description about Model' ); ?>
+    </div>
+    <div>
+        <a href="<?= $this->url->helper->precinct->create() ?>" class="btn btn-primary">
+            <?= FontAwesome::html( FontAwesome::FAR_FA_LONG_ARROW_ALT_LEFT, 'mr-1' ) ?> Add New
+        </a>
+    </div>
+</div>
+<?php $this->blockEndContent( Layout::ADMIN_BLOCK_CONTENT_HEAD ); ?>
+
+<?= $this->helper->widget->alert() ?>
+
+<?= $this->helper->widget->managerToolbar() ?>
+
+<div class="my-3 border bg-white rounded overflow-hidden">
+    <div class="table-responsive">
+        <table class="w-100 text-size-12">
+            <thead class="">
+            <tr>
+                <th class="p-3 text-nowrap">Name</th>
+                <th class="p-3 text-nowrap">Age</th>
+                <th class="p-3 text-nowrap">Gender</th>
+                <th class="p-3 text-nowrap">Location</th>
+                <th class="w-100"></th>
+            </tr>
+            </thead>
+            <tbody>
+
+            <?php
+
+            $i = 0;
+            foreach ( $this->getManager()->queryItems as $item ) :
+
+                ?>
+                <tr class="">
+                    <td class="text-nowrap p-3">Syaiful Shah Zinan</td>
+                    <td class="text-nowrap p-3">33</td>
+                    <td class="text-nowrap p-3">Male</td>
+                    <td class="text-nowrap p-3">Segambut, Kuala Lumpur</td>
+                    <td class="text-nowrap p-3 text-right">
+                        <a href="#" class="btn btn-sm btn-outline-primary text-nowrap">
+                            Edit
+                        </a>
+                    </td>
+                </tr>
+                <?php $i++; endforeach; ?>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<?= $this->helper->widget->managerToolbar() ?>
