@@ -21,6 +21,21 @@ class __MAKER_CONTROLLER_NAME__ extends PrivateController
     public $initMutateProperties = [];
 
     /**
+     * Initiate controller with layout and breadcrumb
+     */
+    protected function init()
+    {
+        parent::init();
+        $this->setLayout( Layout::ADMIN_LAYOUT_NAME );
+        $this->addPageTitle( '__MAKER_CONTROLLER_NAME__' );
+        $this->addBreadcrumb(
+            '__MAKER_CONTROLLER_NAME__',
+            '__MAKER_CONTROLLER_NAME__',
+            '#'
+        );
+    }
+
+    /**
      * Update Action
      */
     public function post()

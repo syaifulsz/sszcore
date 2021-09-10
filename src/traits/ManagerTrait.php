@@ -95,6 +95,9 @@ trait ManagerTrait
     {
         $query = [];
         $service = $this->model();
+        if ( $service === 'DummyModel' ) {
+            return new \Illuminate\Database\Eloquent\Collection();
+        }
 
         if ( $this->parameter_keyword ) {
             $query = array_merge( $query, [ $this->queryKeywords() ] );

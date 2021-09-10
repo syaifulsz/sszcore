@@ -1,0 +1,32 @@
+<?php
+
+use app\components\View;
+use app\components\ViewHelper\Components\Layout;
+use sszcore\components\View\FontAwesome\FontAwesome;
+
+/**
+ * @var $this View
+ * @since syaifulsz/sszcore-0.2.2
+ * Created at __MAKER_CREATED_AT__ via SSZCORE Console Maker (Beta)
+ */
+
+?>
+
+<?php  $this->block(); ?>
+<div class="d-flex flex-column flex-md-row justify-content-between mb-3 mb-md-0">
+    <div>
+        <?= $this->helper->widget->heading( 'Example Page Template', 'Say something about this page' ); ?>
+    </div>
+    <div>
+        <a href="#" class="btn btn-success">
+            <?= FontAwesome::html( FontAwesome::FAS_FA_PLUS_CIRCLE, 'mr-1' ) ?> Do Something
+        </a>
+    </div>
+</div>
+<?php $this->blockEndContent( Layout::ADMIN_BLOCK_CONTENT_HEAD ); ?>
+
+<?= $this->helper->widget->alert() ?>
+
+<div class="alert alert-info">
+    Example Page Template
+</div>

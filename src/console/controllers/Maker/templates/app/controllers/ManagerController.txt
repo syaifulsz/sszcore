@@ -42,7 +42,8 @@ class __MAKER_CONTROLLER_NAME__ extends PrivateController
      */
     public function model()
     {
-        // return __MAKER_MANAGER_MODEL__()
+        // return new __MAKER_MANAGER_MODEL__();
+        return '__MAKER_MANAGER_MODEL__';
     }
 
     public function actionIndex()

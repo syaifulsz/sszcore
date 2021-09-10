@@ -2,7 +2,8 @@
 
 use app\components\View;
 use app\components\ViewHelper\Components\Layout;
-use sszcore\components\View\FontAwesome;
+use sszcore\components\View\FontAwesome\FontAwesome;
+use Faker\Factory;
 
 /**
  * @var $this View
@@ -18,8 +19,8 @@ use sszcore\components\View\FontAwesome;
         <?= $this->helper->widget->heading( 'Manager', 'Short description about Model' ); ?>
     </div>
     <div>
-        <a href="<?= $this->url->helper->precinct->create() ?>" class="btn btn-primary">
-            <?= FontAwesome::html( FontAwesome::FAR_FA_LONG_ARROW_ALT_LEFT, 'mr-1' ) ?> Add New
+        <a href="#" class="btn btn-primary">
+            <?= FontAwesome::html( FontAwesome::FAS_FA_PLUS_CIRCLE, 'mr-1' ) ?> Add New
         </a>
     </div>
 </div>
@@ -35,9 +36,12 @@ use sszcore\components\View\FontAwesome;
             <thead class="">
             <tr>
                 <th class="p-3 text-nowrap">Name</th>
-                <th class="p-3 text-nowrap">Age</th>
-                <th class="p-3 text-nowrap">Gender</th>
-                <th class="p-3 text-nowrap">Location</th>
+                <th class="p-3 text-nowrap">Address</th>
+                <th class="p-3 text-nowrap">Phone Number</th>
+                <th class="p-3 text-nowrap">City</th>
+                <th class="p-3 text-nowrap">Street Name</th>
+                <th class="p-3 text-nowrap">Credit Card Type</th>
+                <th class="p-3 text-nowrap">Credit Card Number</th>
                 <th class="w-100"></th>
             </tr>
             </thead>
@@ -46,21 +50,27 @@ use sszcore\components\View\FontAwesome;
             <?php
 
             $i = 0;
-            foreach ( $this->getManager()->queryItems as $item ) :
+            // $this->getManager()->queryItems
+            for ( $i = 1; $i <= 10; $i++ ) :
+
+            $faker = Factory::create();
 
                 ?>
-                <tr class="">
-                    <td class="text-nowrap p-3">Syaiful Shah Zinan</td>
-                    <td class="text-nowrap p-3">33</td>
-                    <td class="text-nowrap p-3">Male</td>
-                    <td class="text-nowrap p-3">Segambut, Kuala Lumpur</td>
+                <tr class="<?= $i % 2 ? 'bg-white' : 'bg-light' ?>">
+                    <td class="text-nowrap p-3"><?= $faker->name ?></td>
+                    <td class="text-nowrap p-3"><?= $faker->address ?></td>
+                    <td class="text-nowrap p-3"><?= $faker->phoneNumber ?></td>
+                    <td class="text-nowrap p-3"><?= $faker->city ?></td>
+                    <td class="text-nowrap p-3"><?= $faker->streetName ?></td>
+                    <td class="text-nowrap p-3"><?= $faker->creditCardType ?></td>
+                    <td class="text-nowrap p-3"><?= $faker->creditCardNumber ?></td>
                     <td class="text-nowrap p-3 text-right">
                         <a href="#" class="btn btn-sm btn-outline-primary text-nowrap">
                             Edit
                         </a>
                     </td>
                 </tr>
-                <?php $i++; endforeach; ?>
+                <?php endfor ?>
             </tbody>
         </table>
     </div>
