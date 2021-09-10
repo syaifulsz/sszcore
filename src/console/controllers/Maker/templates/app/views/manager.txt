@@ -16,7 +16,7 @@ use Faker\Factory;
 <?php  $this->block(); ?>
 <div class="d-flex flex-column flex-md-row justify-content-between mb-3 mb-md-0">
     <div>
-        <?= $this->helper->widget->heading( 'Manager', 'Short description about Model' ); ?>
+        <?= $this->helper->widget->heading( '__MAKER_CONTROLLER_NAME__', 'Short description about Model' ); ?>
     </div>
     <div>
         <a href="#" class="btn btn-primary">

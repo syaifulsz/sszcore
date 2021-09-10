@@ -98,6 +98,7 @@ class CreateAppControllerController extends ConsoleController
 
         // create view template
         $templateViewContent = file_get_contents( $viewTemplate );
+        $templateViewContent = str_replace( '__MAKER_CONTROLLER_NAME__', $classname, $templateViewContent );
         $templateViewContent = str_replace( '__MAKER_CREATED_AT__', date( 'Y-m-d g:i A' ), $templateViewContent );
 
         $override = (int)$this->params->get( 'override' );
@@ -136,7 +137,7 @@ class CreateAppControllerController extends ConsoleController
         $this->echoBreak();
 
         $this->echo( "File {$classname}.php created at directory {$fileDir}", Color::GREEN_NAME );
-        $this->echo( "File {$viewFileName}.php created at directory {$viewFileDir}", Color::GREEN_NAME );
+        $this->echo( "File {$viewFileName} created at directory {$viewFileDir}", Color::GREEN_NAME );
         $this->echoBreak();
     }
 }
