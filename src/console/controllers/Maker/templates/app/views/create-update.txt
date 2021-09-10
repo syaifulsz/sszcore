@@ -1,0 +1,126 @@
+<?php
+
+use app\components\View;
+use app\components\ViewHelper\Components\Layout;
+use sszcore\components\View\FontAwesome\FontAwesome;
+
+/**
+ * @var $this View
+ * @since syaifulsz/sszcore-0.2.5
+ * Created at __MAKER_CREATED_AT__ via SSZCORE Console Maker (Beta)
+ */
+
+?>
+
+<?php  $this->block(); ?>
+<div class="d-flex flex-column flex-md-row justify-content-between mb-3 mb-md-0">
+    <div>
+        <?= $this->helper->widget->heading( '__MAKER_CONTROLLER_NAME__', 'Say something about this page' ); ?>
+    </div>
+    <div>
+        <a href="#" class="btn btn-outline-secondary">
+            <?= FontAwesome::html( FontAwesome::FAR_FA_LONG_ARROW_ALT_LEFT, 'mr-1' ) ?> Back
+        </a>
+    </div>
+</div>
+<?php $this->blockEndContent( Layout::ADMIN_BLOCK_CONTENT_HEAD ); ?>
+
+<div class="row justify-content-center">
+    <div class="col-md-6">
+
+        <?= $this->helper->widget->alert() ?>
+
+        <?= $this->helper->form->formBegin( '#', 'POST', true ) ?>
+
+        <div class="mb-4">
+            <?= $this->helper->form->inputText(
+                'title',
+                '',
+                'The Big Title',
+                '',
+                '',
+                [],
+                [],
+                [],
+                'Example helper text',
+                true,
+                false,
+                true,
+                true,
+                false
+            ) ?>
+        </div>
+
+        <div class="border rounded p-3 bg-light mb-4">
+            <?= $this->helper->form->inputTextarea(
+                'content',
+                '',
+                'Content',
+                '',
+                '',
+                [],
+                5,
+                0,
+                '',
+                false,
+                false,
+                false,
+                false
+            ) ?>
+
+            <?= $this->helper->form->select(
+                'category',
+                '',
+                'Category',
+                [
+                    'CATEGORY_1' => 'Category 1',
+                    'CATEGORY_2' => 'Category 2',
+                    'CATEGORY_3' => 'Category 3',
+                    'CATEGORY_4' => 'Category 4',
+                    'CATEGORY_5' => 'Category 5',
+                ],
+                '',
+                '',
+                [],
+                [],
+                [],
+                false,
+                false,
+                false,
+                false,
+                false,
+                true
+            ) ?>
+        </div>
+
+        <div class="form-group form-check">
+            <input type="checkbox" class="form-check-input" id="active">
+            <label class="form-check-label" for="active">Active</label>
+        </div>
+
+        <hr />
+
+        <?= $this->helper->form->inputFile(
+            'support_document',
+            'Attached Supported Document',
+            '',
+            'Only support image format .jpg, .jpeg, and .png only.'
+        ) ?>
+
+        <div class="d-flex justify-content-between mt-5">
+            <div>
+                <a href="#" class="btn btn-outline-secondary">
+                    <?= FontAwesome::html( FontAwesome::FAR_FA_LONG_ARROW_ALT_LEFT, 'mr-1' ) ?> Cancel
+                </a>
+            </div>
+            <div>
+                <a href="#" class="btn btn-success">
+                    Submit <?= FontAwesome::html( FontAwesome::FAR_FA_LONG_ARROW_ALT_RIGHT, 'ml-1' ) ?>
+                </a>
+            </div>
+        </div>
+
+        <?= $this->helper->form->formEnd() ?>
+
+    </div>
+</div>

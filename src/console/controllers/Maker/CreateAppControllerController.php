@@ -31,7 +31,8 @@ class CreateAppControllerController extends ConsoleController
 
         $viewTemplateNameMapper = [
             'Controller' => 'controller',
-            'ManagerController' => 'manager'
+            'ManagerController' => 'manager',
+            'CreateUpdateController' => 'create-update',
         ];
         $viewTemplateName = $viewTemplateNameMapper[ $template ] ?? '';
 
@@ -89,10 +90,6 @@ class CreateAppControllerController extends ConsoleController
         if ( !file_exists( $viewFileDir ) ) {
             mkdir( $viewFileDir, 0755, true );
         }
-
-        // $this->echo( $viewTemplateName, Color::YELLOW_NAME );
-        // $this->echo( $viewFile, Color::YELLOW_NAME );
-        // die;
 
         $viewTemplate = "{$templateDir}/app/views/{$viewTemplateName}.txt";
 

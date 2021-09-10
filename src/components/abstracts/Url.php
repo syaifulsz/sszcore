@@ -186,6 +186,18 @@ abstract class Url implements UrlInterface
     }
 
     /**
+     * @param string $url
+     * @param string $alert_message
+     * @param string $alert_type
+     * @param array $alert_data
+     */
+    public function redirectWithAlertMessage( string $url, string $alert_message = '', string $alert_type = 'info', array $alert_data = [] )
+    {
+        Session::getInstance()->alert( $alert_message, $alert_type, $alert_data );
+        $this->redirect( $url );
+    }
+
+    /**
      * @param string $key
      * @return array
      */
