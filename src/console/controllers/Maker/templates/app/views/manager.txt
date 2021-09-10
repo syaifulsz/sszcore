@@ -6,6 +6,8 @@ use sszcore\components\View\FontAwesome;
 
 /**
  * @var $this View
+ * @since syaifulsz/sszcore-0.2.2
+ * Created at __MAKER_CREATED_AT__ via SSZCORE Console Maker (Beta)
  */
 
 ?>
