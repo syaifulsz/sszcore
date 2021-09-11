@@ -19,7 +19,10 @@
         "illuminate/database": "^8.52",
         "illuminate/pagination": "^8.52",
         "firebase/php-jwt": "^5.4",
-        "voku/html-min": "^4.4"
+        "voku/html-min": "^4.4",
+        "swiftmailer/swiftmailer": "^6.2",
+        "mailgun/mailgun-php": "^3.5",
+        "phpoffice/phpspreadsheet": "^1.18"
     },
     "autoload": {
         "psr-4": {
