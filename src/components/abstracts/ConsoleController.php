@@ -2,8 +2,6 @@
 
 namespace sszcore\components\abstracts;
 
-// ini_set( 'display_errors', 1 );
-
 use sszcore\traits\ConfigPropertyTrait;
 use sszcore\traits\ConsoleComponentTrait;
 use sszcore\traits\UrlPropertyTrait;
@@ -20,8 +18,12 @@ abstract class ConsoleController
     use ConfigPropertyTrait;
     use UrlPropertyTrait;
 
-    public function __construct()
+    /**
+     * @param array $configs
+     */
+    public function __construct( array $configs = [] )
     {
+        $componentConfig = $this->initializeComponentConfig( $configs );
         $reflection = new \ReflectionClass( $this );
         $this->echo( 'Console Controller: ' . $reflection->getName() );
     }

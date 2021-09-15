@@ -23,6 +23,8 @@ class Mailer
      */
     public function __construct( array $configs = [] )
     {
+        $componentConfig = $this->initializeComponentConfig( $configs );
+
         $this->from = $this->config->get( 'mailgun.from', [] );
 
         if ( ( $name = $this->config->get( 'mailgun.from_name' ) ) && ( $email = $this->config->get( 'mailgun.from_email' ) ) ) {

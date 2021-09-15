@@ -16,6 +16,14 @@ class CreateAppControllerController extends ConsoleController
 {
     use CreateTemplateNameFromClassname;
 
+    /**
+     * @return string
+     */
+    public function getTemplateDir()
+    {
+        return realpath( __DIR__ . '/templates' );
+    }
+
     public function run()
     {
         if ( !$classname = $this->params->get( 'classname' ) ) {
@@ -48,7 +56,7 @@ class CreateAppControllerController extends ConsoleController
         $namespace = implode( '\\', $classnameArray );
 
         // get controller template
-        $templateDir = realpath( __DIR__ . '/templates' );
+        $templateDir = $this->getTemplateDir();
         $template = "{$templateDir}/app/controllers/{$template}.txt";
         if ( !file_exists( $template ) ) {
             $this->echo( 'Error: Template not exist!', Color::RED_NAME );

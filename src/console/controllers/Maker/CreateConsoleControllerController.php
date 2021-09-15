@@ -13,6 +13,14 @@ use sszcore\components\Str;
  */
 class CreateConsoleControllerController extends ConsoleController
 {
+    /**
+     * @return string
+     */
+    public function getTemplateDir()
+    {
+        return realpath( __DIR__ . '/templates' );
+    }
+
     public function run()
     {
         if ( !$classname = $this->params->get( 'classname' ) ) {
@@ -36,7 +44,7 @@ class CreateConsoleControllerController extends ConsoleController
         $namespace = implode( '\\', $classnameArray );
 
         // get template
-        $templateDir = realpath( __DIR__ . '/templates' );
+        $templateDir = $this->getTemplateDir();
         $template = "{$templateDir}/console/{$template}.txt";
         if ( !file_exists( $template ) ) {
             $this->echo( 'Error: Template not exist!', Color::RED_NAME );
@@ -58,7 +66,8 @@ class CreateConsoleControllerController extends ConsoleController
             mkdir( $fileDir, 0755, true );
         }
 
-        if ( file_exists( $file ) ) {
+        $override = (int)$this->params->get( 'override' );
+        if ( !$override && file_exists( $file ) ) {
             $this->echo( 'Error: Controller with the same name already exist!', Color::RED_NAME );
             $this->echoBreak();
             die();

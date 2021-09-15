@@ -1,0 +1,36 @@
+<?php
+
+namespace console\__MAKER_NAMESPACE__;
+
+use Illuminate\Support\Collection;
+use sszcore\traits\ConsoleExportTrait;
+use sszcore\components\abstracts\ConsoleController;
+
+/**
+ * Class __MAKER_CONTROLLER_NAME__
+ * @package console\__MAKER_NAMESPACE__
+ *
+ * @since syaifulsz/sszcore-0.2.8
+ * Created at __MAKER_CREATED_AT__ via SSZCORE Console Maker (Beta)
+ */
+class __MAKER_CONTROLLER_NAME__ extends ConsoleController
+{
+    use ConsoleExportTrait;
+
+    public function getHeaders()
+    {
+        return [];
+    }
+
+    /**
+     * @return Collection
+     */
+    public function getItems()
+    {
+        return new Collection();
+    }
+
+    public function loopRecord( $item )
+    {
+    }
+}

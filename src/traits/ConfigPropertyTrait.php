@@ -25,4 +25,14 @@ trait ConfigPropertyTrait
         }
         return $this->attributes[ 'config' ] ?? null;
     }
+
+    /**
+     * Initialize Component Config
+     *
+     * @return Config
+     */
+    public function initializeComponentConfig( array $configs = [] )
+    {
+        return $this->config;
+    }
 }

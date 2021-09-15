@@ -82,7 +82,13 @@ class Cache
     public function getCacheConfigAttribute()
     {
         if ( !isset( $this->attributes[ 'cache_config' ] ) ) {
-            $config = require "{$this->app_dir}/configs/memcached.php";
+
+            $config = [];
+            $appConfigFile = "{$this->app_dir}/configs/memcached.php";
+            if ( file_exists( $appConfigFile ) ) {
+                $config = require $appConfigFile;
+            }
+
             if ( $this->site_id ) {
                 $siteConfig = "{$this->site_dir}/configs/memcached.php";
                 if ( file_exists( $siteConfig ) ) {
